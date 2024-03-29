@@ -1,5 +1,9 @@
 package com.cpearl.yourmultiblock.recipe;
 
+import com.cpearl.yourmultiblock.recipe.content.RecipeInputFluids;
+import com.cpearl.yourmultiblock.recipe.content.RecipeInputIngredient;
+import com.cpearl.yourmultiblock.recipe.content.RecipeOutputFluids;
+import com.cpearl.yourmultiblock.recipe.content.RecipeOutputItems;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import net.minecraft.nbt.CompoundTag;
@@ -25,16 +29,26 @@ public class MultiblockRecipeSerializer implements RecipeSerializer<MultiblockRe
     @Override
     public @NotNull MultiblockRecipe fromJson(ResourceLocation id, JsonObject json) {
         var inputIngredientsArray = json.getAsJsonArray("inputIngredients");
-        List<Ingredient> inputIngredients = new ArrayList<>();
+        List<RecipeInputIngredient> inputIngredients = new ArrayList<>();
         for (var ingredient: inputIngredientsArray)
-            inputIngredients.add(CraftingHelper.getIngredient(ingredient));
+            inputIngredients.add(RecipeInputIngredient.fromJson(ingredient));
 
         var inputFluidsArray = json.getAsJsonArray("inputFluids");
-        List<FluidStack> inputFluids = new ArrayList<>();
+        List<RecipeInputFluids> inputFluids = new ArrayList<>();
         for (var fluid: inputFluidsArray)
-            inputFluids.add(FluidStack.loadFluidStackFromNBT(CraftingHelper.getNBT(fluid)));
+            inputFluids.add(RecipeInputFluids.fromJson(fluid));
 
-        return null;
+        var outputItemsArray = json.getAsJsonArray("outputItems");
+        List<RecipeOutputItems> outputItems = new ArrayList<>();
+        for (var item: outputItemsArray)
+            outputItems.add(RecipeOutputItems.fromJson(item));
+
+        var outputFluidsArray = json.getAsJsonArray("outputFluids");
+        List<RecipeOutputFluids> outputFluids = new ArrayList<>();
+        for (var fluid: outputFluidsArray)
+            outputFluids.add(RecipeOutputFluids.fromJson(fluid));
+
+        return new MultiblockRecipe(id, MultiblockRecipe.TEST_TYPE, inputIngredients, inputFluids, outputItems, outputFluids, 20);
     }
 
     @Override

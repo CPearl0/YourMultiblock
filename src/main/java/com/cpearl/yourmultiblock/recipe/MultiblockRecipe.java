@@ -1,6 +1,10 @@
 package com.cpearl.yourmultiblock.recipe;
 
 import com.cpearl.yourmultiblock.YourMultiblock;
+import com.cpearl.yourmultiblock.recipe.content.RecipeInputFluids;
+import com.cpearl.yourmultiblock.recipe.content.RecipeInputIngredient;
+import com.cpearl.yourmultiblock.recipe.content.RecipeOutputFluids;
+import com.cpearl.yourmultiblock.recipe.content.RecipeOutputItems;
 import com.cpearl.yourmultiblock.registry.YMBRecipeTypes;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
@@ -12,7 +16,6 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -26,9 +29,9 @@ public class MultiblockRecipe implements Recipe<Container> {
     public static final MultiblockRecipe TEST1 = new MultiblockRecipe(
             new ResourceLocation(YourMultiblock.MODID, "test1"),
             TEST_TYPE,
-            List.of(Ingredient.of(new ItemStack(Items.APPLE))),
+            List.of(new RecipeInputIngredient(Ingredient.of(new ItemStack(Items.APPLE)))),
             new ArrayList<>(),
-            List.of(new ItemStack(Items.DIAMOND)),
+            List.of(new RecipeOutputItems(new ItemStack(Items.DIAMOND))),
             new ArrayList<>(),
             40
     );
@@ -37,14 +40,14 @@ public class MultiblockRecipe implements Recipe<Container> {
 
     public final RecipeType<? extends MultiblockRecipe> recipeType;
 
-    public final List<Ingredient> recipeIngredients;
-    public final List<FluidStack> recipeFluids;
-    public final List<ItemStack> resultItems;
-    public final List<FluidStack> resultFluids;
+    public final List<RecipeInputIngredient> recipeIngredients;
+    public final List<RecipeInputFluids> recipeFluids;
+    public final List<RecipeOutputItems> resultItems;
+    public final List<RecipeOutputFluids> resultFluids;
 
     public final int processTime;
 
-    public MultiblockRecipe(ResourceLocation id, RecipeType<? extends MultiblockRecipe> recipeType, List<Ingredient> recipeIngredients, List<FluidStack> recipeFluids, List<ItemStack> resultItems, List<FluidStack> resultFluids, int processTime) {
+    public MultiblockRecipe(ResourceLocation id, RecipeType<? extends MultiblockRecipe> recipeType, List<RecipeInputIngredient> recipeIngredients, List<RecipeInputFluids> recipeFluids, List<RecipeOutputItems> resultItems, List<RecipeOutputFluids> resultFluids, int processTime) {
         this.id = id;
         this.recipeType = recipeType;
         this.recipeIngredients = recipeIngredients;
