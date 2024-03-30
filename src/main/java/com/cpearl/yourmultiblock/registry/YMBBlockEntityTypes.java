@@ -2,6 +2,7 @@ package com.cpearl.yourmultiblock.registry;
 
 import com.cpearl.yourmultiblock.YourMultiblock;
 import com.cpearl.yourmultiblock.block.ControllerBlockEntity;
+import com.cpearl.yourmultiblock.recipe.MultiblockRecipeType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;

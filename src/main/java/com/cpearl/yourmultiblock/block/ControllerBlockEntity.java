@@ -2,6 +2,7 @@ package com.cpearl.yourmultiblock.block;
 
 import com.cpearl.yourmultiblock.recipe.MultiblockRecipe;
 import com.cpearl.yourmultiblock.registry.YMBBlockEntityTypes;
+import com.cpearl.yourmultiblock.structure.MultiblockStructure;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -11,7 +12,10 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.items.ItemHandlerHelper;
+
+import java.util.List;
 
 public class ControllerBlockEntity extends BlockEntity {
     public ControllerBlockEntity(BlockPos pos, BlockState state) {
@@ -23,6 +27,7 @@ public class ControllerBlockEntity extends BlockEntity {
             controllerBlockEntity.tick(level, pos, state);
     }
 
+    public MultiblockStructure structure = null;
     protected MultiblockRecipe processRecipe = null;
     protected int processTime = 0;
 
@@ -89,5 +94,9 @@ public class ControllerBlockEntity extends BlockEntity {
                 }
             });
         }
+    }
+
+    protected void gatherInputs(Level level, BlockPos pos, Rotation rotation, List<ItemStack> items, List<FluidStack> fluids) {
+
     }
 }
